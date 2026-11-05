@@ -196,7 +196,7 @@ function injectStyles() {
 // --- STRUTTURA HTML CALENDARIO ---
 function buildMainUI() {
     containerEl.innerHTML = `
-        <div class="module-wrapper">
+        <div class="module-wrapper" style="display:flex; flex-direction:column;">
             <div class="cal-header">
                 <div class="cal-nav">
                     <button id="cal-prev"><span class="material-symbols-outlined">chevron_left</span></button>
@@ -216,6 +216,11 @@ function buildMainUI() {
             </div>
             
             <div class="cal-grid" id="cal-grid-body"></div>
+
+            <p style="margin-top:auto; padding-top:2rem; font-size:0.75rem; line-height:1.4; text-align:center; color:var(--text-secondary);">
+                <span class="material-symbols-outlined" style="font-size:14px; vertical-align:-2px; margin-right:3px;">lock</span>
+                I tuoi dati restano nel dispositivo e nei backup che decidi tu di creare (file esportati o invii al tuo bot Telegram). <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--accent-color); white-space:nowrap;">Informativa privacy</a>
+            </p>
         </div>
     `;
 }

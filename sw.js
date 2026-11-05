@@ -2,8 +2,8 @@
 // File dell'app e librerie/font esterni: risposta dalla cache e aggiornamento in background
 // (dopo un nuovo deploy la versione aggiornata appare alla riapertura successiva).
 // Le chiamate a Telegram non passano da qui.
-const CACHE = 'migraine-v1';
-const SHELL = ['./', 'index.html', 'migraine.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
+const CACHE = 'migraine-v2';
+const SHELL = ['./', 'index.html', 'migraine.js', 'privacy.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 const EXTERNAL = ['fonts.googleapis.com', 'fonts.gstatic.com', 'cdnjs.cloudflare.com'];
 
 self.addEventListener('install', e => {
