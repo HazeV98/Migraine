@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diario Emicrania</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ef4444">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Emicrania">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+:root {
+    --bg-color: #f4f6f8; --surface-color: #ffffff; --surface-light: rgba(150,150,150,0.08);
+    --text-primary: #1e293b; --text-secondary: #64748b; --accent-color: #2563eb;
+    --border-soft: rgba(148,163,184,0.3); --border-radius: 16px;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+}
+[data-theme="dark"] {
+    --bg-color: #0f172a; --surface-color: #1e293b; --surface-light: rgba(15,23,42,0.55);
+    --text-primary: #f8fafc; --text-secondary: #cbd5e1; --accent-color: #3b82f6;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.5);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-color); color: var(--text-primary); min-height: 100vh;
+}
+#app { width: 100%; max-width: 760px; margin: 0 auto; padding: calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom)); }
+.module-wrapper { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow); min-height: 60vh; }
+.hidden { display: none !important; }
+.material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; display: inline-block; font-size: 24px; -webkit-font-smoothing: antialiased; }
+
+.btn { flex: 1; padding: 0.8rem; border: none; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 1rem; font-family: inherit; transition: opacity .2s, transform .1s; }
+.btn:hover { opacity: .9; } .btn:active { transform: scale(.98); }
+.btn.primary { background: var(--accent-color); color: #fff; }
+.btn.secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--text-secondary); }
+.btn.outline { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); }
+.btn.danger { background: #ef4444; color: #fff; }
+.btn.danger.outline { background: transparent; border: 1px solid #ef4444; color: #ef4444; }
+.icon-btn { background: none; border: none; color: var(--text-primary); cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.icon-btn:hover { background: rgba(150,150,150,.12); }
+.input-select { width: 100%; padding: .8rem; border: 1px solid var(--border-soft); border-radius: 14px; background: var(--surface-light); color: var(--text-primary); font-family: inherit; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(2,6,23,.68); display: flex; align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(8px); padding: 1rem; overflow-y: auto; }
+.modal-overlay.hidden { display: none !important; }
+.modal-content { background: var(--surface-color); width: min(92vw, 500px); max-height: 90vh; overflow-y: auto; border-radius: var(--border-radius); padding: 1.5rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,.2); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(150,150,150,.2); padding-bottom: .8rem; position: sticky; top: -1.5rem; background: var(--surface-color); z-index: 2; }
+.settings-section { margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  // Tema: segue il sistema
+  const dark = matchMedia('(prefers-color-scheme: dark)');
+  const applyTheme = () => document.documentElement.setAttribute('data-theme', dark.matches ? 'dark' : 'light');
+  applyTheme(); dark.addEventListener('change', applyTheme);
+</script>
+<script type="module">
+  import { init } from './migraine.js';
+  init(document.getElementById('app'));
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  }
+</script>
+</body>
+</html>
